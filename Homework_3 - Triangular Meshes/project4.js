@@ -24,12 +24,12 @@ function GetModelViewProjection( projectionMatrix, translationX, translationY, t
 							0, 0, 0, 1];
 
 	let rotationMatrixY = [
-		               		Math.cos(rotationY), 0, -Math.sin(rotationY), 0,
+							Math.cos(rotationY), 0, -Math.sin(rotationY), 0,
 							0, 1, 0, 0,
 							Math.sin(rotationY), 0, Math.cos(rotationY), 0,
 							0, 0, 0, 1];
 
-    // Finally, we need to make the multiplication by making use of the function: MatrixMult
+	// Finally, we need to make the multiplication by making use of the function: MatrixMult
 	// We first apply the right parameter and then the left one
 	// We obtain this order: projectionMatrix*trans*rotationMatrixX*rotationMatrixY
 	let finalRotation = MatrixMult( rotationMatrixX, rotationMatrixY);
@@ -97,7 +97,7 @@ class MeshDrawer
 
 		//We repeat the same for the texture coordinates
 		gl.bindBuffer( gl.ARRAY_BUFFER, this.textureBuffer );
-    	gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( texCoords ), gl.STATIC_DRAW );
+		gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( texCoords ), gl.STATIC_DRAW );
 	}
 
 	// This method is called when the user changes the state of the
@@ -151,7 +151,7 @@ class MeshDrawer
 
 		//Set texture filtering and wrapping mode
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
 		gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
 
@@ -197,9 +197,10 @@ var vsMesh = `
 			pos_temp = vec3(pos.x, pos.z, pos.y);
 			gl_Position = mvp * vec4(pos_temp, 1.0);
 		}
-		else {
+		else 
+		{
 
-				gl_Position = mvp * vec4(pos, 1.0);
+			gl_Position = mvp * vec4(pos, 1.0);
 		}
 
 		textCoordinate= txc;
@@ -220,12 +221,12 @@ var fsMesh = `
 
 		if (showText == 1)
 		{
-				gl_FragColor = texture2D (texture, textCoordinate);
+			gl_FragColor = texture2D (texture, textCoordinate);
 		}
 		else
 		{
 
-				gl_FragColor = vec4(1,gl_FragCoord.z*gl_FragCoord.z,0,1);
+			gl_FragColor = vec4(1,gl_FragCoord.z*gl_FragCoord.z,0,1);
 		}
 
 	}
